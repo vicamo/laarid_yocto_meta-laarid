@@ -1,7 +1,7 @@
 {
     "config": {
         "MACHINE"      : "qemux86",
-        "DISTRO"       : "poky",
+        "DISTRO"       : "laarid",
         "DL_DIR"       : "${TOPDIR}/../downloads",
         "IMAGE_FSTYPES": "ext3 jffs2 tar.bz2",
         "IMAGE_INSTALL_append": "",
