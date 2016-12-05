@@ -1,0 +1,46 @@
+dist: trusty
+sudo: false
+language: c
+cache: ccache
+
+branches:
+  only: master
+
+env:
+  global:
+  - TEMPLATECONF=meta-laarid/conf
+  matrix:
+  - MACHINE=qemuarm
+  - MACHINE=qemuarm64
+  - MACHINE=qemumips
+  - MACHINE=qemumips64
+  - MACHINE=qemuppc
+  - MACHINE=qemux86
+  - MACHINE=qemux86-64
+
+addons:
+  apt:
+    packages:
+    - chrpath
+    - ccache
+    - cpio
+    - diffstat
+    - gawk
+    - gcc-multilib
+    - libsdl1.2-dev
+    - python3
+    - socat
+    - texinfo
+    - unzip
+    - wget
+
+install:
+- (cd ~/build; git clone --depth 1 -b krogoth git://git.yoctoproject.org/poky.git)
+
+script:
+- cd ~/build/poky;
+  mv $TRAVIS_BUILD_DIR meta-laarid;
+  export TRAVIS_BUILD_DIR=$(pwd)
+- source oe-init-build-env
+- env
+- bitbake core-image-minimal
